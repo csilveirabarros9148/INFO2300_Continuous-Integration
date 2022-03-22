@@ -1,0 +1,266 @@
+/*
+ * Program ID: inClass5
+ * 
+ * Purpose: Inclass Assignment for creating auto Reverse Name and find out DigitCheck.
+ * 
+ * Revision History:
+ *      created by Carlos Mauricio Silveira Barros Filho, Camila Ruybal, Nicole Voll Arvisais Voll Nov 16, 2020
+ * 
+*/
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Inclass5
+{
+    static class StringReverse
+    {
+        public static string ReverseString(string myReverse)
+        {
+            char[] reverseName = myReverse.ToCharArray();
+            Array.Reverse(reverseName);
+            return new string(reverseName);
+        }
+    }
+
+    class Program
+    {
+        static int CalculateEndCheckDigit(int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15)
+        {
+            //First Method:	Area of a square = Length2 
+            return number1 + (number2 * 2) + number3 + (number4 * 2) + number5 + (number6 * 2) + number7 + (number8 * 2) + number9 + (number10 * 2) + number11 + (number12 * 2) + number13 + (number14 * 2) + number15;
+        }
+
+        static int CalculateBegginingCheckDigit(int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16)
+        {
+            //First Method:	Area of a square = Length2 
+            return (number2 * 2) + number3 + (number4 * 2) + number5 + (number6 * 2) + number7 + (number8 * 2) + number9 + (number10 * 2) + number11 + (number12 * 2) + number13 + (number14 * 2) + number15 + (number16 * 2);
+        }
+        static void Main(string[] args)
+        {
+
+            int[] creditCardNumber = new int[15] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] numberStore = new int[2] { 0, 0 };
+
+            int countingNumbers = 0;
+            string nameString = "";
+            int digitCheck = 0;
+            string answerQuestion = "";
+            
+            int anyNumber = 0;
+            int digitCheckNumber = 0;
+
+            Console.WriteLine("Digit your name");
+            nameString = Console.ReadLine();
+            Console.WriteLine("The name that you digit was: "+nameString);
+            nameString =StringReverse.ReverseString(nameString);
+            Console.WriteLine("The Reversal form is: " + nameString);
+
+
+            Console.WriteLine();
+            Console.WriteLine("==========================================================================================================");
+            Console.WriteLine();
+            Console.WriteLine("You will have to digit 15 numbers of your credit card to discover your digitcheck.");
+            Console.WriteLine("");
+
+
+                Console.WriteLine("==========================================================================================================");
+                Console.WriteLine("                                                   Options");
+                Console.WriteLine("==========================================================================================================");
+                Console.WriteLine("1. Access checkdigit in the end");
+                Console.WriteLine("2. Access checkdigit in the beggining");
+                Console.WriteLine("Other text will make the program exit.");
+                Console.WriteLine("==========================================================================================================");
+                Console.WriteLine("PS: Press 1 or 2 to access any checkdigit. If you text any other thing, you are going to skip the process.");
+                Console.WriteLine("==========================================================================================================");
+
+                answerQuestion = Console.ReadLine();
+                if (answerQuestion == "1" || answerQuestion == "01" || answerQuestion == "a" || answerQuestion == "A") //check digit in the end
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("==========================================================================================================");
+                    Console.WriteLine();
+
+                    for (int i = 0; i < creditCardNumber.Length; i++)// Group Inicials
+                    {
+                        countingNumbers++;
+                        Console.WriteLine("Write your " + countingNumbers + " number.");
+
+                        try {
+                            creditCardNumber[i] = int.Parse(Console.ReadLine());
+
+                            if (creditCardNumber[i] >= 10)
+                            {
+                                Console.WriteLine("Sorry, we only accept numbers bellow 10");
+                                creditCardNumber[i] = creditCardNumber[i] - 1;
+                                i = i - 1;
+                                countingNumbers = countingNumbers - 1;
+                            }
+                            else
+                            {
+
+                            }
+                        }//end of try
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("This program only accept integer numbers. No letters or decimals.");
+                            creditCardNumber[i] = creditCardNumber[i] - 1;
+                            i = i - 1;
+                            countingNumbers = countingNumbers - 1;
+
+                        }//end of catch format exception
+                        catch (OverflowException)
+                        {
+                            Console.WriteLine("This program only handle 0 to 9. More than that is not necessary.");
+                            creditCardNumber[i] = creditCardNumber[i] - 1;
+                            i = i - 1;
+                            countingNumbers = countingNumbers - 1;
+
+                        }//end of catch format exception
+
+
+
+                    }//end of for
+                
+
+
+                countingNumbers = 0;
+
+                anyNumber = CalculateEndCheckDigit(creditCardNumber[0], creditCardNumber[1], creditCardNumber[2], creditCardNumber[3], creditCardNumber[4], creditCardNumber[5], creditCardNumber[6], creditCardNumber[7], creditCardNumber[8], creditCardNumber[9], creditCardNumber[10], creditCardNumber[11], creditCardNumber[12], creditCardNumber[13], creditCardNumber[14]);
+
+                Console.WriteLine("The sum of all numbers : " + anyNumber);
+
+                digitCheck = anyNumber;
+
+
+                numberStore[0] = anyNumber;
+                for (int i = 1; i < numberStore.Length; i++)// Group Inicials
+                {
+                    numberStore[i] = (numberStore[i - 1] - 10);
+                    if (numberStore[i] >= 10)
+                    {
+
+                        Array.Resize(ref numberStore, i + 2);
+
+
+
+                    }
+                    else
+                    {
+                        digitCheckNumber = 10 - numberStore[i];
+                        Console.WriteLine("DigitCheck : " + digitCheckNumber);
+                        break;
+
+                    }
+
+
+
+
+                    
+            }// end for
+                }//end IF check digit in the end
+
+
+                else if (answerQuestion == "2" || answerQuestion == "02" || answerQuestion == "b" || answerQuestion == "b") //check digit in the end
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("==========================================================================================================");
+                    Console.WriteLine();
+
+                    for (int i = 0; i < creditCardNumber.Length; i++)// Group Inicials
+                    {
+                        countingNumbers++;
+                        Console.WriteLine("Write your " + countingNumbers + " number.");
+
+                        try
+                        {
+                            creditCardNumber[i] = int.Parse(Console.ReadLine());
+
+                            if (creditCardNumber[i] >= 10)
+                            {
+                                Console.WriteLine("Sorry, we only accept numbers bellow 10");
+                                creditCardNumber[i] = creditCardNumber[i] - 1;
+                                i = i - 1;
+                                countingNumbers = countingNumbers - 1;
+                            }
+                            else
+                            {
+
+                            }
+                        }//end of try
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("This program only accept integer numbers. No letters or decimals.");
+                            creditCardNumber[i] = creditCardNumber[i] - 1;
+                            i = i - 1;
+                            countingNumbers = countingNumbers - 1;
+
+                        }//end of catch format exception
+                        catch (OverflowException)
+                        {
+                            Console.WriteLine("This program only handle 0 to 9. More than that is not necessary.");
+                            creditCardNumber[i] = creditCardNumber[i] - 1;
+                            i = i - 1;
+                            countingNumbers = countingNumbers - 1;
+
+                        }//end of catch format exception
+
+
+
+                    }//end of for
+
+
+
+                    countingNumbers = 0;
+
+                    anyNumber = CalculateBegginingCheckDigit(creditCardNumber[0], creditCardNumber[1], creditCardNumber[2], creditCardNumber[3], creditCardNumber[4], creditCardNumber[5], creditCardNumber[6], creditCardNumber[7], creditCardNumber[8], creditCardNumber[9], creditCardNumber[10], creditCardNumber[11], creditCardNumber[12], creditCardNumber[13], creditCardNumber[14]);
+
+                    Console.WriteLine("The sum of all numbers : " + anyNumber);
+
+                    digitCheck = anyNumber;
+
+
+                    numberStore[0] = anyNumber;
+                    for (int i = 1; i < numberStore.Length; i++)// Group Inicials
+                    {
+                        numberStore[i] = (numberStore[i - 1] - 10);
+                        if (numberStore[i] >= 10)
+                        {
+
+                            Array.Resize(ref numberStore, i + 2);
+
+
+
+                        }
+                        else
+                        {
+                            digitCheckNumber = 10 - numberStore[i];
+                            Console.WriteLine("Check digit : " + digitCheckNumber);
+                            break;
+
+                        }
+
+
+
+
+
+                    }// end for
+                }//end IF
+
+
+                else
+                {
+                Console.WriteLine("Bye, have a nice day.");
+            }
+            
+            
+
+        Console.ReadLine();
+            
+        }
+    }
+}
