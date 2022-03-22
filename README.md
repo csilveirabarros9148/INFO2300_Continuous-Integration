@@ -5,3 +5,5 @@
 At first, will ask the user to add his name and then will give 2 choice to get the digitcheck of the credit card from the user. After the user digits 15 numbers, it will appear the digitcheck from the credit card.
 
 I choice the licence because it was the way that works better with the program prospective.
+
+### 13.	Make and commit a change to an online file in the main branch, fetch and pull the change to the local machine. ###
